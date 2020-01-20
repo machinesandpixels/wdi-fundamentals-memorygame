@@ -1,11 +1,5 @@
 console.log('mainJS is connected.');
 
-//  <img src="images/back.png" alt="Queen of Diamonds">
-// <img src="images/back.png" alt="Queen of Hearts">
-// <img src="images/back.png" alt="King of Diamonds">
-// <img src="images/back.png" alt="King of Hearts"></img> 
-
-
 const cards = [
     {
         rank: "queen",
@@ -37,15 +31,21 @@ const cards = [
 let cardsInPlay = [];
 
 function checkForMatch(){
+
     if (cardsInPlay.length === 2) {
 
-
         if (cardsInPlay[0] === cardsInPlay[1]) {
+            
             alert("You found a match!");
+            reset();
+            
         }
 
-    else {
-        alert("Sorry, try again.");
+        else {
+
+            alert("Sorry, try again.");
+            reset();
+
         }
     }
 }
@@ -56,7 +56,7 @@ function filpCard(){
 
     cardsInPlay.push(cards[cardId].rank);
     console.log(cardsInPlay);
-
+   
     this.setAttribute('src', cards[cardId].cardImage);
    
     
@@ -70,7 +70,6 @@ function createBoard(){
 
     for (let i = 0; i < cards.length; i++){
 
-        
         let cardElement = document.createElement('img');
         cardElement.setAttribute('src', "images/back.png");
         cardElement.setAttribute('data-id', i);
@@ -81,6 +80,23 @@ function createBoard(){
     }
 
 } 
+
+function reset(){
+    
+    let images = document.getElementsByTagName('img');
+    console.log(images);
+
+    for (let i = 0; i < images.length; i++){
+
+        images[i].setAttribute('src', "images/back.png");
+        images[i].setAttribute('data-id', i);
+
+    }
+
+    cardsInPlay.splice(0);
+    console.log(cardsInPlay);
+    
+}
 
 createBoard();
 
